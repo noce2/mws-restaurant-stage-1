@@ -302,7 +302,6 @@ nav h1 a {
     flex-direction: row;
     min-height: initial;
     flex: 1 1 auto;
-    justify-content: space-between;
   }
   #map-container {
     flex: 1 1 auto;
