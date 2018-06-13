@@ -344,4 +344,26 @@ nav h1 a {
   #restaurants-list li {
     padding: 0 0 25px;
   }
+} }
+}
+@media screen and (min-width: 1025px) {
+  body {
+    max-width: 1440px;
+    margin: auto;
+  }
+  #maincontent {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: initial;
+  }
+  #map {
+    height: 400px;
+  }
+  #restaurants-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
