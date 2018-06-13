@@ -288,7 +288,32 @@ nav h1 a {
   }
   #restaurants-list li {
     padding: 0 0 25px;
-  } 
+  }
+  .inside {
+    display: flex;
+    flex-direction: column;
+    height: initial;
+    overflow-x: hidden;
+  }
+  .inside header #breadcrumb {
+    width: initial;
+  }
+  .inside #maincontent {
+    align-items: center;
+  }
+  .inside #maincontent #map-container {
+    margin-top: 131.5px;
+    height: 250px;
+    position: initial;
+    width: 100%;
+  }
+  .inside #maincontent #restaurant-container,  .inside #maincontent #reviews-container{
+    padding: 30px 40px 30px;
+    width: 80%;
+  }
+  .inside #footer {
+    width: initial;
+  }
 }
 @media screen and (min-width: 533px) and (max-width: 825px){
   body {
