@@ -399,26 +399,6 @@ nav h1 a {
     bottom: 0px;
   }
 }
-@media screen and (min-width: 826px) and (max-width: 1024px){
-  #maincontent {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    min-height: initial;
-  }
-  #map {
-    height: 300px;
-  }
-  #restaurants-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
-  #restaurants-list li {
-    padding: 0 0 25px;
-  }
-}
 @media screen and (min-width: 1025px) {
   body {
     max-width: 1440px;
@@ -438,5 +418,13 @@ nav h1 a {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+  }
+  .inside header, .inside footer {
+    right: calc((100% - 1440px)/2);
+    max-width: 1440px;
+  }
+  .inside #map-container {
+    right: calc((100% - 1440px)/2);
+    max-width: 720px;
   }
 }
