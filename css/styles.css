@@ -419,9 +419,12 @@ nav h1 a {
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
-  .inside header, .inside footer {
+}
+@media screen and (min-width: 1440px) {
+  .inside header, .inside #footer {
     right: calc((100% - 1440px)/2);
     max-width: 1440px;
+    box-sizing: border-box;
   }
   .inside #map-container {
     right: calc((100% - 1440px)/2);
