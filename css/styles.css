@@ -50,6 +50,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+  box-sizing: border-box;
 }
 /* ====================== Navigation ====================== */
 nav {
@@ -424,7 +425,6 @@ nav h1 a {
   .inside header, .inside #footer {
     right: calc((100% - 1440px)/2);
     max-width: 1440px;
-    box-sizing: border-box;
   }
   .inside #map-container {
     right: calc((100% - 1440px)/2);
