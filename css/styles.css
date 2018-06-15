@@ -377,9 +377,6 @@ nav h1 a {
     display: flex;
     flex-direction: column;
   }
-  .inside header #breadcrumb {
-    width: initial;
-  }
   .inside #maincontent {
     display: flex;
     flex-direction: column;
@@ -387,9 +384,9 @@ nav h1 a {
     flex: 1 1 auto;
   }
   .inside #map-container {
-    height: 100%;
+    height: initial;
     bottom: 65px;
-    top: 131px;
+    top: 80px;
   }
   .inside #restaurant-container, .inside #reviews-container {
     width: calc(50% - 40px - 40px);
