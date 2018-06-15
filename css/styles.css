@@ -10,7 +10,9 @@ body,td,th,p{
 body {
 	background-color: #fdfdfd;
 	margin: 0;
-	position:relative;
+  position:relative;
+  max-width: 100%;
+  height: 100vh;
 }
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
@@ -38,6 +40,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
+  max-width: 100%;
 }
 #footer {
   background-color: #444;
@@ -47,6 +50,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+  box-sizing: border-box;
 }
 /* ====================== Navigation ====================== */
 nav {
@@ -106,7 +110,7 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   background-color: #3397DB;
   align-items: center;
 }
@@ -203,9 +207,7 @@ nav h1 a {
   width: 100%;
 }
 .inside #footer {
-  bottom: 0;
-  position: absolute;
-  width: 50%;
+  width: 100%;
 }
 #restaurant-name {
   color: #f18200;
@@ -272,4 +274,157 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+/* ================= Responsive Layouts ================= */
+@media screen and (max-width: 532px) {
+  #maincontent {
+    display: flex;
+    flex-direction: column;
+  }
+  #restaurants-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #restaurants-list li {
+    padding: 0 0 25px;
+  }
+  .inside {
+    display: flex;
+    flex-direction: column;
+    height: initial;
+    overflow-x: hidden;
+  }
+  .inside header #breadcrumb {
+    width: initial;
+  }
+  .inside #maincontent {
+    align-items: center;
+  }
+  .inside #maincontent #map-container {
+    margin-top: 131.5px;
+    height: 250px;
+    position: initial;
+    width: 100%;
+  }
+  .inside #maincontent #restaurant-container,  .inside #maincontent #reviews-container{
+    padding: 30px 40px 30px;
+    width: 80%;
+  }
+  .inside #footer {
+    width: initial;
+  }
+}
+@media screen and (min-width: 533px) and (max-width: 825px){
+  body, body.inside {
+    display: flex;
+    flex-direction: column;
+  }
+  #maincontent {
+    display: flex;
+    flex-direction: row;
+    min-height: initial;
+    flex: 1 1 auto;
+  }
+  #map-container {
+    flex: 1 1 auto;
+  }
+  #map-container #map {
+    height: 100%;
+  }
+  #results-container {
+    overflow-y: scroll
+  }
+  #results-container .filter-options {
+    display: flex;
+    flex-direction: column;
+  }
+  #restaurants-list {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #restaurants-list li {
+    padding: 0 0 25px;
+  }
+}
+@media screen and (min-width: 826px) and (max-width: 1024px){
+  #maincontent {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: initial;
+  }
+  #map {
+    height: 300px;
+  }
+  #restaurants-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  #restaurants-list li {
+    padding: 0 0 25px;
+  }
+}
+@media screen and (min-width: 533px) {
+  body.inside {
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .inside #maincontent {
+    display: flex;
+    flex-direction: column;
+    min-height: initial;
+    flex: 1 1 auto;
+  }
+  .inside #map-container {
+    height: initial;
+    bottom: 65px;
+    top: 80px;
+  }
+  .inside #restaurant-container, .inside #reviews-container {
+    width: calc(50% - 40px - 40px);
+  }
+  .inside #footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+  }
+}
+@media screen and (min-width: 1025px) {
+  body {
+    max-width: 1440px;
+    margin: auto;
+  }
+  #maincontent {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: initial;
+  }
+  #map {
+    height: 400px;
+  }
+  #restaurants-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .inside header, .inside #footer {
+    right: calc((100% - 1440px)/2);
+    max-width: 1440px;
+  }
+  .inside #map-container {
+    right: calc((100% - 1440px)/2);
+    max-width: 720px;
+  }
 }
