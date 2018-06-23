@@ -73,6 +73,28 @@ class DataHelper {
   }
 
   /**
+   * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
+   */
+  static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood) {
+    // Fetch all restaurants
+    return DataHelper.fetchRestaurants()
+      .then((_restaurants) => {
+        let results = _restaurants;
+        if (cuisine !== 'all') { // filter by cuisine
+          results = results.filter(r => r.cuisine_type === cuisine);
+        }
+        if (neighborhood !== 'all') { // filter by neighborhood
+          results = results.filter(r => r.neighborhood === neighborhood);
+        }
+        return results;
+      })
+      .catch((err) => {
+        console.error(`the data could not be fetched because of ${err}`);
+        return null;
+      });
+  }
+
+  /**
    * Fetch all neighborhoods with proper error handling.
    */
   static fetchNeighborhoods() {
