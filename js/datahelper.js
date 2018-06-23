@@ -123,4 +123,32 @@ class DataHelper {
       })
       .catch(err => `there was an error fetching the neighbourhoods: ${err}`);
   }
+
+  /**
+   * Restaurant page URL.
+   */
+  static urlForRestaurant(restaurant) {
+    return (`./restaurant.html?id=${restaurant.id}`);
+  }
+
+  /**
+   * Restaurant image URL.
+   */
+  static imageUrlForRestaurant(restaurant) {
+    return (`/img/${restaurant.photograph}`);
+  }
+
+  /**
+   * Map marker for a restaurant.
+   */
+  static mapMarkerForRestaurant(restaurant, map) {
+    const marker = new google.maps.Marker({
+      position: restaurant.latlng,
+      title: restaurant.name,
+      url: DataHelper.urlForRestaurant(restaurant),
+      map,
+      animation: google.maps.Animation.DROP,
+    });
+    return marker;
+  }
 }
