@@ -1,5 +1,6 @@
 /* eslint linebreak-style: ["error", "windows"] */
 /* global self */
+/* global google */
 
 /**
  * Common database helper functions.
@@ -68,7 +69,7 @@ class DataHelper {
         _restaurants.filter(r => r.neighborhood === neighborhood))
       .catch((err) => {
         console.error(`the data could not be fetched because of ${err}`);
-        return null;
+        throw new Error(`the data could not be fetched because of ${err}`);
       });
   }
 
