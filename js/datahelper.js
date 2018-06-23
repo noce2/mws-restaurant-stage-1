@@ -38,8 +38,7 @@ class DataHelper {
         return response.json();
       })
       .catch((err) => {
-        console.error(`the data could not be fetched because of ${err}`);
-        return null;
+        throw new Error(`the data could not be fetched because of ${err}`);
       });
   }
 
