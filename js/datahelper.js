@@ -32,7 +32,7 @@ class DataHelper {
    */
   static fetchRestaurantById(id) {
     // fetch all restaurants with proper error handling.
-    return self.fetch(`${DataHelper.SERVER_URL}/${id}`)
+    return self.fetch(`${DataHelper.SERVER_URL}${id}`)
       .then((response) => {
         if (!response.ok) throw (new Error(`response was not a 200, because ${response.body}`));
         return response.json();

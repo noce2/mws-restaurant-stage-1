@@ -34,14 +34,14 @@ fetchRestaurantFromURL = (callback) => {
     const error = 'No restaurant id in URL';
     callback(error, null);
   } else {
-    DataHelper.fetchRestaurantById()
+    DataHelper.fetchRestaurantById(id)
       .then((_restaurant) => {
-        self.restaurant = restaurant;
-        if (!restaurant) {
+        self.restaurant = _restaurant;
+        if (!_restaurant) {
           throw new Error('new restaurant was found for the given id');
         }
         fillRestaurantHTML();
-        callback(null, restaurant);
+        callback(null, _restaurant);
       })
       .catch(err => console.error(err));
   }
