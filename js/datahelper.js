@@ -58,6 +58,21 @@ class DataHelper {
   }
 
   /**
+   * Fetch restaurants by a neighborhood with proper error handling.
+   */
+  static fetchRestaurantByNeighborhood(neighborhood) {
+    // Fetch all restaurants
+    return DataHelper.fetchRestaurants()
+      .then(_restaurants =>
+      // Filter restaurants to have only given neighborhood
+        _restaurants.filter(r => r.neighborhood === neighborhood))
+      .catch((err) => {
+        console.error(`the data could not be fetched because of ${err}`);
+        return null;
+      });
+  }
+
+  /**
    * Fetch all neighborhoods with proper error handling.
    */
   static fetchNeighborhoods() {
