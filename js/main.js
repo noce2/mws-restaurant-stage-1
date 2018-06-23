@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"] */
 let restaurants,
   neighborhoods,
   cuisines
@@ -16,14 +17,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * Fetch all neighborhoods and set their HTML.
  */
 fetchNeighborhoods = () => {
-  DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-    if (error) { // Got an error
-      console.error(error);
-    } else {
-      self.neighborhoods = neighborhoods;
+  DataHelper.fetchNeighborhoods()
+    .then((_neighborhoods) => {
+      self.neighborhoods = _neighborhoods;
       fillNeighborhoodsHTML();
-    }
-  });
+    })
+    .catch(err => console.error(err));
 }
 
 /**
