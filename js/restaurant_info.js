@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"] */
 let restaurant;
 var map;
 
@@ -15,7 +16,7 @@ window.initMap = () => {
         scrollwheel: false
       });
       fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+      DataHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
   });
 }
@@ -30,20 +31,21 @@ fetchRestaurantFromURL = (callback) => {
   }
   const id = getParameterByName('id');
   if (!id) { // no id found in URL
-    error = 'No restaurant id in URL'
+    const error = 'No restaurant id in URL';
     callback(error, null);
   } else {
-    DBHelper.fetchRestaurantById(id, (error, restaurant) => {
-      self.restaurant = restaurant;
-      if (!restaurant) {
-        console.error(error);
-        return;
-      }
-      fillRestaurantHTML();
-      callback(null, restaurant)
-    });
+    DataHelper.fetchRestaurantById(id)
+      .then((_restaurant) => {
+        self.restaurant = _restaurant;
+        if (!_restaurant) {
+          throw new Error('new restaurant was found for the given id');
+        }
+        fillRestaurantHTML();
+        callback(null, _restaurant);
+      })
+      .catch(err => console.error(err));
   }
-}
+};
 
 /**
  * Create restaurant HTML and add it to the webpage
@@ -57,7 +59,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.src = DataHelper.imageUrlForRestaurant(restaurant);
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
