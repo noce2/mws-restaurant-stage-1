@@ -25,6 +25,23 @@ class DataHelper {
       })
       .catch(err => console.log(`the data could not be fetched because of ${err}`));
   }
+
+  /**
+   * Fetch a restaurant by its ID.
+   */
+  static fetchRestaurantById(id) {
+    // fetch all restaurants with proper error handling.
+    return self.fetch(`${DataHelper.SERVER_URL}/${id}`)
+      .then((response) => {
+        if (!response.ok) throw (new Error(`response was not a 200, because ${response.body}`));
+        return response.json();
+      })
+      .catch((err) => {
+        console.error(`the data could not be fetched because of ${err}`);
+        return null;
+      });
+  }
+
   /**
    * Fetch all neighborhoods with proper error handling.
    */
