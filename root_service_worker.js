@@ -7,7 +7,7 @@ self.addEventListener('install', (event) => {
   const imgUrlsToAdd = Array(10).fill('').map((each, index) => `img/${index + 1}.jpg`);
   const urlsToCache = [
     '/',
-    'data/restaurants.json',
+    // 'data/restaurants.json', no longer needed as data fetched from server and cached in indexedDB
     'css/styles.css',
     'js/dbhelper.js',
     'js/main.js',
