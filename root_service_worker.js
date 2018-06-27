@@ -2,8 +2,12 @@
 /* global self */
 /* global caches */
 /* global fetch */
-
 self.addEventListener('install', (event) => {
+  self.importScripts('/js/indexeddbstore.class.js', '/js/idb.js'); // needed because SW has own scope, does not share window
+  console.log(typeof IndexedDBStore);
+  IndexedDBStore.put('hello', 'world')
+    .then(() => console.log('hello world added'))
+    .catch(err => console.error(`hello world not added because of ${err}`));
   const imgUrlsToAdd = Array(10).fill('').map((each, index) => `img/${index + 1}.jpg`);
   const urlsToCache = [
     '/',
