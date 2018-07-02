@@ -14,17 +14,34 @@ class DataHelper {
     const port = 1337;
     return `http://localhost:${port}/restaurants/`;
   }
+  /**
+ * fetches a json from the indexedDB instance. If the
+ * object is not there, it fetches it from the network
+ * and stores it for later.
+ * Returns an object containing the data not a response object.
+ * @param {Request} request
+ */
+  static fetchFromIndexedDB(request) {
+    return Promise.resolve(IndexedDBStore.get(request)
+      .then((result) => {
+        if (result) return result;
+        return self.fetch(request).then((response) => {
+          if (!response.ok) throw (new Error(`response was not a 200, because ${response.body}`));
+          return response.clone().json().then(data => IndexedDBStore.put(request, data)
+            .then(() => {
+              console.log(`new data stored successfully`);
+              return response.json();
+            }));
+        });
+      }));
+  }
 
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants() {
-    return self.fetch(DataHelper.SERVER_URL)
-      .then((response) => {
-        if (!response.ok) throw (new Error(`response was not a 200, because ${response.body}`));
-        return response.json();
-      })
-      .catch(err => console.log(`the data could not be fetched because of ${err}`));
+    return DataHelper.fetchFromIndexedDB(DataHelper.SERVER_URL)
+      .catch(err => console.error(`the data could not be fetched because of ${err}`));
   }
 
   /**
@@ -32,14 +49,8 @@ class DataHelper {
    */
   static fetchRestaurantById(id) {
     // fetch all restaurants with proper error handling.
-    return self.fetch(`${DataHelper.SERVER_URL}${id}`)
-      .then((response) => {
-        if (!response.ok) throw (new Error(`response was not a 200, because ${response.body}`));
-        return response.json();
-      })
-      .catch((err) => {
-        throw new Error(`the data could not be fetched because of ${err}`);
-      });
+    return DataHelper.fetchFromIndexedDB(`${DataHelper.SERVER_URL}${id}`)
+      .catch(err => console.error(`the data could not be fetched because of ${err}`));
   }
 
   /**
