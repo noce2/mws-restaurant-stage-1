@@ -41,8 +41,7 @@ class IndexedDBStore {
       .then((db) => {
         const transaction = db.transaction(IndexedDBStore.objectStoreName);
         const restaurantDataStore = transaction.objectStore(IndexedDBStore.objectStoreName);
-        restaurantDataStore.get(key);
-        return transaction.complete;
+        return restaurantDataStore.get(key);
       });
   }
 
@@ -101,5 +100,3 @@ class IndexedDBStore {
   }
 }
  */
-
- self.IndexedDBStore = IndexedDBStore;
