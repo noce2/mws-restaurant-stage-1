@@ -139,6 +139,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DataHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `a picture of ${restaurant.name}`;
   li.append(image);
 
   const name = document.createElement('h1');
