@@ -20,15 +20,17 @@
       <div id="map"></div>
     </section>
     <section id="results-container">
-      <div class="filter-options">
-        <h2>Filter Results</h2>
+      <form class="filter-options" role='form' aria-label="Filter Results">
+        <h2 id="filter-options-title">Filter Results</h2>
+        <label for="neighborhoods-select">Filter by neighbourhood</label>
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
           <option value="all">All Neighborhoods</option>
         </select>
+        <label for="cuisines-select">Filter by cuisine</label>
         <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
           <option value="all">All Cuisines</option>
         </select>
-      </div>
+      </form>
       <ul id="restaurants-list"></ul>
     </section>
   </main>
