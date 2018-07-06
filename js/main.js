@@ -157,6 +157,7 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DataHelper.urlForRestaurant(restaurant);
+  more.setAttribute('aria-label', `View Details for ${restaurant.name}`);
   li.append(more);
 
   return li;
