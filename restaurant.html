@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <!-- Normalize.css for better cross-browser consistency -->
@@ -7,6 +7,8 @@
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <!-- Main CSS file -->
   <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#252831"/>
   <title>Restaurant Info</title>
 </head>
 
@@ -57,10 +59,16 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
+  <!-- IDB Promise Library -->
+  <script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
+  <!-- IDB Class and Methods -->
+  <script type="application/javascript" charset="utf-8" src="js/indexeddbstore.class.js"></script>
   <!-- Controller for initialising service worker-->
   <script type="application/javascript" charset="utf-8" src="js/index_controller.js"></script>
   <!-- Database helpers -->
-  <script type="text/javascript" src="js/dbhelper.js"></script>
+  <!-- <script type="text/javascript" src="js/dbhelper.js"></script> -->
+  <!-- Helper for data retrieval from server -->
+  <script type="application/javascript" charset="utf-8" src="js/datahelper.js"></script>
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
   <!-- Google Maps -->
