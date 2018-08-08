@@ -253,6 +253,19 @@ nav h1 a {
 #reviews-container {
   padding: 30px 40px 80px;
 }
+
+#reviews-container #add-review{
+  background-color: purple;
+  color: #fff;
+  display: inline-block;
+  font-size: 10pt;
+  margin: 0;
+  padding: 8px 30px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 #reviews-container h2 {
   color: purple;
   font-size: 24pt;
