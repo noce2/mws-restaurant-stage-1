@@ -102,11 +102,12 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
-  const addReviewsLink = document.createElement('a');
-  addReviewsLink.href=`/restaurant/add_review.html?id=${getParameterByName('id')}`;
-  addReviewsLink.id = 'add-review';
-  addReviewsLink.innerHTML = 'WRITE A REVIEW';
-  container.appendChild(addReviewsLink);
+  const reviewLink = document.createElement('a');
+  reviewLink.href=`/restaurant/review.html?action=create&id=${getParameterByName('id')}`;
+  reviewLink.id = 'add-review';
+  reviewLink.innerHTML = 'WRITE A REVIEW';
+  reviewLink.target = '_blank';
+  container.appendChild(reviewLink);
 
   if (!reviews) {
     const noReviews = document.createElement('p');

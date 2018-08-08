@@ -295,6 +295,16 @@ nav h1 a {
   color: #666;
 }
 
+/* ================= Review Form ======================== */
+#review-form {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 100%;
+  padding: 30px 15px 30px;
+}
+
 /* ================= Responsive Layouts ================= */
 @media screen and (max-width: 532px) {
   #maincontent {
