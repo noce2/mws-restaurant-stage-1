@@ -296,13 +296,19 @@ nav h1 a {
 }
 
 /* ================= Review Form ======================== */
+/* The review form styles reuse the styles from the 
+ * Restaurant Info View.*/
 #review-form {
   margin-top: 80px;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  max-width: 100%;
+  width: 90%;
+  max-width: 500px;
+  box-sizing: border-box;
   padding: 30px 15px 30px;
+  align-self: center; /* This is needed because the Restaurant Info view
+  aligns its contents to the left to make space for the map. As the change
+  is only needed for this view, it was done specifically. */
 }
 
 /* ================= Responsive Layouts ================= */
