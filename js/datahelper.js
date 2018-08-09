@@ -54,6 +54,16 @@ class DataHelper {
   }
 
   /**
+   * Fetch a restaurant's reviews by its ID.
+   * @param id - The restaurant's id
+   */
+  static fetchRestaurantReviewsById(id) {
+    // fetch all restaurants with proper error handling.
+    return DataHelper.fetchFromIndexedDB(`http://localhost:1337/reviews/?restaurant_id=${id}`)
+      .catch(err => console.error(`the data could not be fetched because of ${err}`));
+  }
+
+  /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
   static fetchRestaurantByCuisine(cuisine) {

@@ -70,7 +70,12 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
   // fill reviews
-  fillReviewsHTML();
+  DataHelper.fetchRestaurantReviewsById(restaurant.id)
+    .then((reviews) => {
+      self.restaurant.reviews = reviews;
+      fillReviewsHTML();
+    })
+    .catch(err => console.error(`Unable to fetch the reviews because of: ${err}`));
 }
 
 /**
@@ -132,7 +137,8 @@ createReviewHTML = (review) => {
   li.appendChild(name);
 
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  const reviewDate = new Date(review.updatedAt);
+  date.innerHTML = `${reviewDate.getUTCDate()}/${reviewDate.getUTCMonth()}/${reviewDate.getUTCFullYear()}`;
   li.appendChild(date);
 
   const rating = document.createElement('p');
