@@ -298,12 +298,26 @@ nav h1 a {
 /* ================= Review Form ======================== */
 /* The review form styles reuse the styles from the 
  * Restaurant Info View.*/
-#review-form {
+#review-form-container {
   margin-top: 80px;
-  display: flex;
-  flex-direction: column;
+  padding: 15px;
   width: 90%;
   max-width: 500px;
+}
+
+#review-form-container #review_title {
+  color: purple;
+  font-family: Arial,sans-serif;
+  font-size: 20pt;
+  font-weight: 200;
+  letter-spacing: 0;
+  line-height: 1.1;
+  align-self: flex-start;
+}
+
+#review-form-container #review-form {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   padding: 30px 15px 30px;
   align-self: center; /* This is needed because the Restaurant Info view
