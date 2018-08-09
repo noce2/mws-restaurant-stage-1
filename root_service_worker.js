@@ -13,7 +13,7 @@ self.addEventListener('install', (event) => {
     'js/main.js',
     'js/restaurant_info.js',
   ].concat(imgUrlsToAdd);
-  event.waitUntil(caches.open('mws-restaurant-v5')
+  event.waitUntil(caches.open('mws-restaurant-v6')
     .then(cache => cache.addAll(urlsToCache))
     .then(() => console.log('assets fully cached'))
     .catch(err => console.log(`cache failed to open because of: ${err}`)));
