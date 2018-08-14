@@ -1,10 +1,61 @@
 /* eslint linebreak-style: ["error", "windows"] */
+/* global document */
+/* global window */
+
 let restaurant;
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchRestaurantFromURL()
     .then(_restaurant => fillReviewHTML(_restaurant))
     .catch(err => console.error(err));
+});
+
+document.addEventListener('submit', (event) => {
+  // first get the data to be submitted:
+  const restaurantId = document.getElementById('restaurant_id').value;
+  const reviewerName = document.getElementById('reviewer_name').value;
+  let rating;
+
+  document.getElementsByName('rating').forEach((each) => {
+    if (each.checked) {
+      rating = each.value;
+    }
+  });
+
+  const comments = document.getElementById('comment_text').value;
+  console.log(`${JSON.stringify({
+    restaurantId,
+    reviewerName,
+    rating,
+    comments,
+  })}`);
+  // next stop the event from progressing
+
+  event.preventDefault();
+  // using fetch as per http2
+
+  fetch('http://localhost:1337/reviews/', {
+    method: 'POST',
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      restaurantId,
+      reviewerName,
+      rating,
+      comments,
+    }),
+  })
+    .then(response => response.status)
+    .then((responseStatus) => {
+      console.log(`response from the server is ${JSON.stringify(responseStatus)}`);
+      if (responseStatus === 201 &&
+        confirm('Your review has successfully been submitted so this window will now close. Click ok to close.')) {
+        window.close();
+      }
+    })
+    .catch(err => console.log(`fetch failed because of ${err}`));
 });
 
 /**

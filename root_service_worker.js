@@ -26,6 +26,8 @@ self.addEventListener('activate', () => {
 self.addEventListener('fetch', (event) => {
   if ((/(\/restaurants)/g).test(event.request.url)) {
     console.log('not fetching from CacheAPI because indexedDB is used further down the line');
+  } else if (event.request.method === 'POST') {
+    console.log('do nothing because this is a post request');
   } else {
     event.respondWith(fetchFromCache(event.request)
       .catch(err => console.log(`fetch operation failed because of: ${err}`)));
