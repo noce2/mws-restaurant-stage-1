@@ -41,8 +41,8 @@ document.addEventListener('submit', (event) => {
       "Content-Type": "application/json; charset=utf-8",
     },
     body: JSON.stringify({
-      restaurantId,
-      reviewerName,
+      restaurant_id: restaurantId,
+      name: reviewerName,
       rating,
       comments,
     }),
