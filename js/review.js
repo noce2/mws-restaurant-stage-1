@@ -1,6 +1,8 @@
 /* eslint linebreak-style: ["error", "windows"] */
 /* global document */
 /* global window */
+/* global alert */
+/* global confirm */
 
 let restaurant;
 
@@ -36,16 +38,10 @@ document.addEventListener('submit', (event) => {
 
   fetch('http://localhost:1337/reviews/', {
     method: 'POST',
-    mode: "cors",
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify({
-      restaurant_id: restaurantId,
-      name: reviewerName,
-      rating,
-      comments,
-    }),
+    body: `restaurant_id=${restaurantId}&name=${reviewerName}&rating=${rating}&comments=${comments}`,
   })
     .then(response => response.status)
     .then((responseStatus) => {
@@ -53,6 +49,8 @@ document.addEventListener('submit', (event) => {
       if (responseStatus === 201 &&
         confirm('Your review has successfully been submitted so this window will now close. Click ok to close.')) {
         window.close();
+      } else {
+        alert('Your review has not been successfully posted but the app will retry a submission later');
       }
     })
     .catch(err => console.log(`fetch failed because of ${err}`));
