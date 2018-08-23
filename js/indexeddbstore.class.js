@@ -40,7 +40,11 @@ class IndexedDBStore {
       .then((db) => {
         const transaction = db.transaction(dataStoreName, 'readwrite');
         const restaurantDataStore = transaction.objectStore(dataStoreName);
-        restaurantDataStore.put(value, key);
+        if (!restaurantDataStore.autoIncrement) {
+          restaurantDataStore.put(value, key);
+        } else {
+          restaurantDataStore.put(value);
+        }
         return transaction.complete;
       });
   }
