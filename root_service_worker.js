@@ -27,23 +27,24 @@ self.addEventListener('fetch', (event) => {
   if ((/(\/restaurants)/g).test(event.request.url)) {
     console.log('not fetching from CacheAPI because indexedDB is used further down the line');
   } else if (event.request.method === 'POST') {
-    if (!self.navigator.online) {
+    if (!self.navigator.onLine) {
       console.log('browser is offline so caching post request');
       console.log(event);
-      IndexedDBStore
+      event.respondWith(IndexedDBStore
         /* the request object needs to be stringified because it has methods attached to it
          * which cause the put operation to fail. Stringification removes the methods and
          * parsing turns the string into an object once more. */
         .put(null, JSON.parse(JSON.stringify(event.request)), IndexedDBStore.queueForNewReviews)
         .then((result) => {
           console.log(`result from cache operation is ${result}`);
-          event.respondWith(new Response("", {
-            status: 404,
-            statusText: 'The resource is unavailable',
-          }));
-        });
+          return new Response('', {
+            status: 202,
+            statusText: 'The request has been accepted but the resource is unavailable',
+          });
+        }));
+    } else {
+      console.log('do nothing because this is a post request');
     }
-    console.log('do nothing because this is a post request');
   } else {
     event.respondWith(fetchFromCache(event.request)
       .catch(err => console.log(`fetch operation failed because of: ${err}`)));
