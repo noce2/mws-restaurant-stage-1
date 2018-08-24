@@ -24,7 +24,8 @@ self.addEventListener('activate', () => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if ((/(\/restaurants)/g).test(event.request.url)) {
+  /* Not putting restaurant data or review data in the Cache */
+  if ((/(\/restaurants)|(\/reviews\/\?restaurant_id)/g).test(event.request.url)) {
     console.log('not fetching from CacheAPI because indexedDB is used further down the line');
   } else if (event.request.method === 'POST') {
     if (!self.navigator.onLine) {
