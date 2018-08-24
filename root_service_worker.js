@@ -2,6 +2,8 @@
 /* global self */
 /* global caches */
 /* global fetch */
+const cacheVersion = 'mws-restaurant-v6';
+
 self.addEventListener('install', (event) => {
   self.importScripts('/js/indexeddbstore.class.js', '/js/idb.js'); // needed because SW has own scope, does not share window
   const imgUrlsToAdd = Array(10).fill('').map((each, index) => `img/${index + 1}.jpg`);
@@ -13,14 +15,23 @@ self.addEventListener('install', (event) => {
     'js/main.js',
     'js/restaurant_info.js',
   ].concat(imgUrlsToAdd);
-  event.waitUntil(caches.open('mws-restaurant-v6')
+  event.waitUntil(caches.open(cacheVersion)
     .then(cache => cache.addAll(urlsToCache))
     .then(() => console.log('assets fully cached'))
     .catch(err => console.log(`cache failed to open because of: ${err}`)));
 });
 
-self.addEventListener('activate', () => {
-  console.log('service worker activating');
+self.addEventListener('activate', (event) => {
+  console.log('service worker activating and deleting old caches');
+  event.waitUntil((caches.keys())
+    .then(cacheNames =>
+      (cacheNames.filter(each => each !== cacheVersion)
+        .map(eachCacheName => caches.delete(eachCacheName))
+        .map((eachResult) => {
+          console.log(`one delete was a success - ${eachResult}`);
+          return eachResult;
+        })))
+    .catch(err => console.log(`deletion of old caches failed because of ${err}`)));
 });
 
 self.addEventListener('fetch', (event) => {
@@ -59,12 +70,12 @@ self.addEventListener('fetch', (event) => {
  * @param {Request} request
  */
 function fetchFromCache(request) {
-  return caches.open('mws-restaurant-v5')
+  return caches.open(cacheVersion)
     .then(cache => cache.match(request))
     .then((res) => {
       if (res) return res;
       return fetch(request).then(response =>
-        caches.open('mws-restaurant-v5')
+        caches.open(cacheVersion)
           .then(cache => cache.put(request, response.clone()))
           .then(() => response));
     });
